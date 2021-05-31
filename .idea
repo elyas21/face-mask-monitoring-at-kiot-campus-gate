@@ -1,0 +1,11 @@
+  if isinstance('config/cam.yaml', str):  # *.yaml file
+        with open('config/cam.yaml') as f:
+            data_dict = yaml.load(f, Loader=yaml.SafeLoader)  # model dict
+  
+
+  how to share state acros file python
+
+
+  count only in border line 
+  how to count in slopy line
+  how to count leaving and comming objects

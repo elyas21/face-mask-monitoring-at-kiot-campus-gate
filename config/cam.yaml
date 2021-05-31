@@ -1,0 +1,49 @@
+cams:
+  [
+    {
+      id: 0,
+      place: "gate 1",
+      x_top_line_from: 0,
+      y_top_line_from: .15,
+      x_top_line_to: 1,
+      y_top_line_to: .15,
+      
+      x_bottom_line_from: 0,
+      y_bottom_line_from: .4,
+      x_bottom_line_to: 1,
+      y_bottom_line_to: .4,
+
+      x_left_line_from: .1,
+      y_left_line_from: 0,
+      x_left_line_to: .1,
+      y_left_line_to: 1,
+      
+      x_right_line_from: .9,
+      y_right_line_from: 0,
+      x_right_line_to: .9,
+      y_right_line_to: 1,
+    },
+    {
+      id: 0,
+      place: "gate 1",
+      x_top_line_from: 0,
+      y_top_line_from: .15,
+      x_top_line_to: 1,
+      y_top_line_to: .15,
+      
+      x_bottom_line_from: 0,
+      y_bottom_line_from: .4,
+      x_bottom_line_to: 1,
+      y_bottom_line_to: .4,
+
+      x_left_line_from: .1,
+      y_left_line_from: 0,
+      x_left_line_to: .1,
+      y_left_line_to: 1,
+      
+      x_right_line_from: .9,
+      y_right_line_from: 0,
+      x_right_line_to: .9,
+      y_right_line_to: 1,
+    },
+  ]
