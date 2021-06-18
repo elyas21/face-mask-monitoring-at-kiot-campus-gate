@@ -145,3 +145,11 @@ def redis_save_count(i, id):
     cams = ['cam1',  'cam2']
     print (f' {cams[i]}  {type(cams[i])}    ++++++++++++++++++++++++            {type(i)}  {i}')
     redis_con.sadd(cams[i], str(id[0]))
+
+
+
+# def streamImage(frame):
+#     ret, buffer = cv2.imencode('.jpg', frame)
+#     frame = buffer.tobytes()
+#     yield (b'--frame\r\n'
+#             b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
