@@ -5,22 +5,45 @@ import struct
 from io import BytesIO
 
 # Capture frame
-cap = cv2.VideoCapture(0)
 
 # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # client_socket.connect(('localhost', 8081))
 
+# This code will run the drone side, it will send video to cache server
+# Lets import the libraries
+# Welcome to PyShine
+# www.pyshine.com
+import socket, cv2, pickle, struct
+import imutils
+import cv2
+
+
+
+
+server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+host_name  = socket.gethostname()
+host_ip = 'localhost' # Enter the Drone IP address
+print('HOST IP:',host_ip)
+port = 9978
+socket_address = (host_ip,port)
+server_socket.bind(socket_address)
+server_socket.listen()
+print("Listening at",socket_address)
+
+client_socket,addr = server_socket.accept()
+
 def streamImage(frame):
+    try:
+        print('CLIENT {} CONNECTED!'.format(addr))
+        if client_socket:
 
-    memfile = BytesIO()
-    np.save(memfile, frame)
-    memfile.seek(0)
-    data = memfile.read()
+            frame  = imutils.resize(frame,width=320)
+            a = pickle.dumps(frame)
+            message = struct.pack("Q",len(a))+a
+            client_socket.sendall(message)
+            # cv2.imshow("TRANSMITTING TO CACHE SERVER",frame)
 
-    # print(f'a\n\\n\n\n\n\n\n' {len(frame)} + '\n'  {frame}  '\n\n\n\n\n\n\n\n')
+    except Exception as e:
+        print(f"CACHE SERVER {addr} DISCONNECTED")
+        pass
 
-    # Send form byte array: frame size + frame content
-    client_socket.sendall(struct.pack("L", len(data)) + data)
-    # print('a\n\\n\n\n\n\n\n' + len(data) + '\n' + data + '\n\n\n\n\n\n\n\n')
-    # print(f'{data} \n\n\n\n\n {len(data)} \n\n\n\n\n')
-    print(f' \n\n\n\n\n\ {client_socket} \n\n\n\n\n')

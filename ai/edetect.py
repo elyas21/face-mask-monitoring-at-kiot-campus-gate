@@ -18,31 +18,7 @@ import config
 from ai.utils import bbox_rel, compute_color_for_labels, draw_boxes, showImage, draw_lines, processResult
 from ai.task.tasks import show_img
 
-
-
-
-
-
-
-
-
-
-import numpy as np
-import socket
-import struct
-from io import BytesIO
-
-
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-try:
-    client_socket.connect(('localhost', 8084))
-except:
-    pass
-
-
-
-
-
+from ai.stream import streamImage
 
 sys.path.insert(0, './yolov5')
 import yaml
@@ -209,17 +185,7 @@ def detect(opt,  save_img=False, **kwargs):
                 # if cv2.waitKey(1) == ord('q'):  # q to quit
                 #     raise StopIteration
                 show_img(p , im0)
-                # streamImage(im0)
-
-                memfile = BytesIO()
-                np.save(memfile, im0)
-                memfile.seek(0)
-                data = memfile.read()
-
-                # print(f'a\n\\n\n\n\n\n\n' {len(im0)} + '\n'  {im0}  '\n\n\n\n\n\n\n\n')
-
-                # Send form byte array: im0 size + im0 content
-                client_socket.sendall(struct.pack("L", len(data)) + data)
+                streamImage(im0)
 
     if save_txt or save_img:
         print('Results saved to %s' % os.getcwd() + os.sep + out)

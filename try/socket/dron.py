@@ -9,9 +9,9 @@ import cv2
 
 server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 host_name  = socket.gethostname()
-host_ip = '192.168.79.102' # Enter the Drone IP address
+host_ip = 'localhost' # Enter the Drone IP address
 print('HOST IP:',host_ip)
-port = 9999
+port = 9995
 socket_address = (host_ip,port)
 server_socket.bind(socket_address)
 server_socket.listen()

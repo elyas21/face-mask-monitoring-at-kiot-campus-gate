@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint, Response
-
+# from maskControl.guard.client import recver_stream
 
 guard = Blueprint('guard', __name__, template_folder='templates')
 
@@ -21,7 +21,7 @@ from maskControl.guard.streamer import Streamer
 
 
 def gen():
-  streamer = Streamer('localhost', 8084)
+  streamer = Streamer()
   streamer.start()
 
   while True:

@@ -11,10 +11,10 @@ import cv2
 
 server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 host_name  = socket.gethostname()
-host_ip = socket.gethostbyname(host_name)
+host_ip = 'localhost'
 print('HOST IP:',host_ip)
-port = 9999
-socket_address = (host_ip,port)
+
+socket_address = (host_ip,9977)
 server_socket.bind(socket_address)
 server_socket.listen()
 print("Listening at",socket_address)
@@ -25,8 +25,8 @@ frame = None
 def start_video_stream():
 	global frame
 	client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-	host_ip = '192.168.79.102' # Here provide Drone IP 
-	port = 9999
+	host_ip = 'localhost' # Here provide Drone IP 
+	port = 9978
 	client_socket.connect((host_ip,port))
 	data = b""
 	payload_size = struct.calcsize("Q")
@@ -75,5 +75,6 @@ while True:
 	print(addr)
 	thread = threading.Thread(target=serve_client, args=(addr,client_socket))
 	thread.start()
-	print("TOTAL CLIENTS ",threading.activeCount() - 2) # edited here because one thread is already started before
+	print("TOTAL CLIENTS ",threading.activeCount() - 2) 
+	# edited here because one thread is already started before
 
