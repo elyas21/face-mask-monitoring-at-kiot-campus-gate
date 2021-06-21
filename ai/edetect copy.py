@@ -59,8 +59,6 @@ def detect(opt,  save_img=False, **kwargs):
                         max_age=cfg.DEEPSORT.MAX_AGE, n_init=cfg.DEEPSORT.N_INIT, nn_budget=cfg.DEEPSORT.NN_BUDGET,
                         use_cuda=True) for si in range(0 ,3)]
 
-   
-
     # Initialize
     device = select_device(opt.device)
     half = device.type != 'cpu'  # half precision only supported on CUDA

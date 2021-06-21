@@ -8,9 +8,10 @@ def dashboard():
     return render_template('dashboard.html')
 
 
-@guard.route("/stream")
-def stream():
-    return render_template('stream.html')
+@guard.route("/stream/<camId>")
+def stream(camId):
+    print(camId)
+    return render_template('stream.html' ,cameraId=camId)
 
 
 @guard.route("/record-disobdient")
@@ -20,14 +21,14 @@ def record_disobdient():
 from maskControl.guard.streamer import Streamer
 
 
-def gen():
-  streamer = Streamer()
+def gen(camId):
+  streamer = Streamer(camId)
   streamer.start()
 
   while True:
     if streamer.streaming:  
       yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + streamer.get_jpeg() + b'\r\n\r\n')
 
-@guard.route('/video_feed')
-def video_feed():
-  return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
+@guard.route('/video_feed/<camId>')
+def video_feed(camId):
+  return Response(gen(camId), mimetype='multipart/x-mixed-replace; boundary=frame')

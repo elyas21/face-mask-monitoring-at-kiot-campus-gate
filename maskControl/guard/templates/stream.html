@@ -5,8 +5,9 @@
     <div class="row">
         <div class="col-lg-8  offset-lg-2">
             <h3 class="mt-5">Live Streaming</h3>
-            <img src="{{ url_for('guard.video_feed') }}" width="100%">
+            <img src="{{ url_for('guard.video_feed' ,camId=cameraId)}}" width="100%">
         </div>
+        {{cameraId}}
     </div>
 </div>
 {% endblock content %}  

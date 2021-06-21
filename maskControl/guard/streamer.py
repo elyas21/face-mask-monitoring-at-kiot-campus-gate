@@ -8,20 +8,22 @@ import socket,cv2, pickle,struct
 
 class Streamer(threading.Thread):
 
-    def __init__(self, hostname='localhost', port=9977):
+    def __init__(self, camId=0, hostname='localhost'):
         threading.Thread.__init__(self)
 
         self.hostname = hostname
-        self.port = port
+
         self.running = False
         self.streaming = False
         self.jpeg = None
-
+        self.jpeg = None
+        self.camId = camId
+        self.port = int(camId)
     def run(self):
-
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         print('Socket created')
-
+        print(self.port)
+        print(self.camId)
         s.connect((self.hostname, self.port))
         print('Socket bind complete')
 
@@ -40,9 +42,7 @@ class Streamer(threading.Thread):
             # print("New connection accepted.")
             data = b''
             while True:
-
         
-
                 while len(data) < payload_size:
                     packet = s.recv(4*1024) # 4K
                     if not packet: break
@@ -65,7 +65,7 @@ class Streamer(threading.Thread):
 
                 self.streaming = True
         
-            s.close()
+            # s.close()
             print('Closing connection...')
             # self.streaming = False
             self.jpeg = None
