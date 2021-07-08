@@ -152,12 +152,14 @@ def detect(opt, save_img=False):
 
                 bbox_xywh = []
                 confs = []
-
+                namess = det[:, -1]
+                print(names)
                 # Adapt detections to deep sort input format
-                for *xyxy, conf, cls in det:
+                for i, *xyxy, conf, cls in enumerate(det):
                     x_c, y_c, bbox_w, bbox_h = bbox_rel(*xyxy)
                     obj = [x_c, y_c, bbox_w, bbox_h]
                     bbox_xywh.append(obj)
+                    namess.append(names[int(i)])
                     confs.append([conf.item()])
 
                 xywhs = torch.Tensor(bbox_xywh)

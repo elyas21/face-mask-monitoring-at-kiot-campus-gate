@@ -1,6 +1,22 @@
 from __future__ import absolute_import, unicode_literals
-from ai.task.task import app
+
+from celery import Celery
+
+app = Celery('task', broker='redis://localhost', backend='redis://localhost', include=['tasks'])
 import cv2
+
+
+
+
+# Optional configuration, see the eApplication user guide.
+app.conf.update(
+result_expires=3600,
+)
+
+
+
+
+
 
 
 @app.task
@@ -29,6 +45,5 @@ def send_to_web():
 
 @app.task
 def show_img(p, img):
-    cv2.imshow(p, img)
-    # if cv2.waitKey(1) == ord('q'):  # q to quit
-    #    return  StopIteration
+    return cv2.imshow(p, img)
+    # if cv2..turn  StopIteration

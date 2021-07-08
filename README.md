@@ -64,3 +64,10 @@ python3 track.py --source ... --save-txt
 
 For more detailed information about the algorithms and their corresponding lisences used in this project access their official github implementations.
 
+## How to strart
+1 run recognition: `python3 e-track.py --source config/cam.txt --img-size 32  --weights /home/black/Downloads/best.pt`
+2 run streaming servers: `python try/socket/catchserver.py ` and `python try/socket/catchserver2.py`
+2 run server: `python run_server`
+
+
+sudo netstat -tpln | grep mysqld > this.txt 

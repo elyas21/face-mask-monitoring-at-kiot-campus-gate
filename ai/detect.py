@@ -30,7 +30,6 @@ if isinstance('config/cam.yaml', str):  # *.yaml file
 
 def detect(opt,  save_img=False, **kwargs):
 
-
     el_video = kwargs.get('video', None)
 
     out, source, weights, view_img, save_txt, imgsz = \
@@ -90,13 +89,7 @@ def detect(opt,  save_img=False, **kwargs):
     txt_path = str(Path(out)) + '/results.txt'
 
     for frame_idx, ( path, img, im0s, vid_cap) in enumerate(dataset):
-        # print(f' \n\n\n\n   '*3)
 
-        # print(f'  {frame_idx},  {vid_cap}  {path}       ')
-        # print(f' \n\n\n\n   img  {type(img)}     {img.shape   }')
-        # # print(f' \n\n\n\n   im0s        {type(im0s) } {im0s}')
-        # print(f' \n\n\n\n   Caps    {type(vid_cap)}   {vid_cap  }')
-        # print(f' \n\n\n\n   '*3)
         img = torch.from_numpy(img).to(device)
         img = img.half() if half else img.float()  # uint8 to fp16/32
         img /= 255.0  # 0 - 255 to 0.0 - 1.0

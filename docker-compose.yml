@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  facemaskmonitoringatkiotcampusgate:
+    image: facemaskmonitoringatkiotcampusgate
+    build:
+      context: .
+      dockerfile: ./Dockerfile

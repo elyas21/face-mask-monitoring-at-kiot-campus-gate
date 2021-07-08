@@ -298,7 +298,7 @@ class LoadStreams:  # multiple IP or RTSP cameras
         # Read next stream frame in a daemon thread
         n = 0
         while cap.isOpened():
-            n += 1
+            n += 2
             # _, self.imgs[index] = cap.read()
             cap.grab()
             if n == 2:  # read every 4th frame

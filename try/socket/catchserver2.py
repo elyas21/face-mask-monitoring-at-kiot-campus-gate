@@ -10,6 +10,8 @@ host_ip = 'localhost'
 print('HOST IP:',host_ip)
 
 socket_address = (host_ip,21000)
+server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
 server_socket.bind(socket_address)
 server_socket.listen()
 print("Listening at",socket_address)
@@ -21,7 +23,7 @@ def start_video_stream():
 	global frame
 	client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 	host_ip = 'localhost' # Here provide Drone IP 
-	port = 20001
+	port = 20000
 	client_socket.connect((host_ip,port))
 	data = b""
 	payload_size = struct.calcsize("Q")
