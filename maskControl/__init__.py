@@ -4,7 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from maskControl.config import Config
-
+import redis
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -13,6 +13,7 @@ login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 mail = Mail()
 
+redis_client = redis.Redis(host='localhost', port=6379)
 
 def create_app(config_class=Config):
     app = Flask(__name__ )

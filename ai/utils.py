@@ -4,6 +4,9 @@ import imagezmq
 import sys
 import redis
 import config
+import time
+
+
 
 
 palette = (2 ** 11 - 1, 2 ** 15 - 1, 2 ** 20 - 1)
@@ -22,6 +25,14 @@ config.cam_nomask_ids = [[], []]
 config.cam_total_mask = []
 config.cam_total_nomask = []
 
+import datetime
+
+last_sec = time.localtime().tm_sec
+last_time_tmp = str(datetime.datetime.now())[:-6]
+
+import redis
+
+r = redis.Redis(host='localhost', port=6379)
 
 
 def bbox_rel(*xyxy):
@@ -125,25 +136,45 @@ def processResult(img, bbox, img_size, namess, cam_src, c_name, identities=None)
     # print(namess)
 
     # this shuld be the right implementation
+    
+    # import time
+    # time.localtime()
+    # time.struct_time(tm_year=2018, tm_mon=7, tm_mday=16, tm_hour=1, tm_min=51, tm_sec=39, tm_wday=0, tm_yday=197, tm_isdst=0)
+    
+    # creat new set each second
+    
+    now_time_tmp = str(datetime.datetime.now())[:-7] if last_time_tmp != str(datetime.datetime.now())[:-6] else last_time_tmp
+    # shirt = 'white' if game_type == 'home' else 'green'
+    now_sec = time.localtime().tm_sec if last_sec == time.localtime().tm_sec else last_sec
+
     if len(bbox) == len(namess):
         for cams in range (0 ,config.no_cams):
             if cam_src == cams:
                 for i, box in enumerate(bbox):
                     id = int(identities[i]) if identities is not None else 0
                     if namess[i] == 'Mask':
+                        r.sadd('mask_list'+str(i), id)
+                        r.sadd('mask_list_'+now_time_tmp+'_'+str(i), id)
+
                         config.cam_mask_ids[cams].append(id)
                     elif namess[i] == 'Without_mask':
-                        print(f'id {id} cam 0 without')
+                        r.sadd('no_mask_list'+str(i), id)
+     
+                        r.sadd('no_mask_list_'+now_time_tmp+'_'+str(i), id)
+                        print('no_mask_list_'+now_time_tmp+'_'+str(i))
+                        # print(f'id {id} cam 0 without')
                         config.cam_nomask_ids[cams].append(id)
-    [ print(ci) for ci in config.cam_mask_ids] 
-    [ print(nci) for nci in config.cam_nomask_ids ]
-    config.cam_total_mask = [len(set(a)) for a in config.cam_mask_ids]
-    config.cam_total_nomask = [len(set(b)) for b in config.cam_nomask_ids]
-    config.cam_total_mask = [set(a) for a in config.cam_mask_ids]
-    config.cam_total_nomask = [set(b) for b in config.cam_nomask_ids]
-    [ print(ci) for ci in config.cam_total_mask] 
-    [ print(nci) for nci in config.cam_total_nomask ]
+    # [ print(ci) for ci in config.cam_mask_ids] 
+    # [ print(nci) for nci in config.cam_nomask_ids ]
+    # config.cam_total_mask = [len(set(a)) for a in config.cam_mask_ids]
+    # config.cam_total_nomask = [len(set(b)) for b in config.cam_nomask_ids]
+    # config.cam_total_mask = [set(a) for a in config.cam_mask_ids]
+    # config.cam_total_nomask = [set(b) for b in config.cam_nomask_ids]
+    # [ print(ci) for ci in config.cam_total_mask] 
+    # [ print(nci) for nci in config.cam_total_nomask ]
     print('\n\n')
+
+    
 
     # if len(bbox) == len(namess):
     #     # dow the work when they are equal

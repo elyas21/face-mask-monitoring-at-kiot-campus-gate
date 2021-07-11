@@ -1,2 +1,1 @@
-inference/cru11.mp4
 inference/c22.mp4

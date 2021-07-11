@@ -54,6 +54,8 @@ host_ip1 = 'localhost' # Enter the Drone IP address
 print('HOST IP:',host_ip1)
 port1 = 20000
 socket_address1 = (host_ip1,port1)
+server_socket1.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
 server_socket1.bind(socket_address1)
 server_socket1.listen()
 print("Listening at",socket_address1)

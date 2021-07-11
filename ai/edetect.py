@@ -15,7 +15,7 @@ from yolov5.utils.general import check_img_size, non_max_suppression, scale_coor
 from yolov5.utils.datasets import LoadImages, LoadStreams
 import sys
 import config
-from ai.stream import streamImage
+# from ai.stream import streamImage
 
 # from ai.stream import streamImage
 
@@ -204,7 +204,7 @@ def detect(opt,  save_img=False, **kwargs):
                 # result.status
                 # result.get()
                 # stream images
-                streamImage(p, im0)
+                # streamImage(p, im0)
                 show_img(p, im0)
     if save_txt or save_img:
         # print('Results saved to %s' % os.getcwd() + os.sep + out)
