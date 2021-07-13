@@ -1,7 +1,6 @@
 {% extends "guardlayout.html" %} {% block content
 %}
-
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="{{ url_for('static',  filename='plugins/plotly-2.2.0.min.js') }}"></script>
 <div>
   <h1>Guard Dashboard Page</h1>
 

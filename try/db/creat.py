@@ -1,13 +1,18 @@
-from datetime import datetime
+from config import Config
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask import current_app
-from maskControl import db, login_manager
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 
+app = Flask(__name__)
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+# initialising Flask
+app = Flask(__name__)
+app.config.from_object(Config)
+
+db = SQLAlchemy(app)
+
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
