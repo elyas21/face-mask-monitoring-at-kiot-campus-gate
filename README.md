@@ -1,22 +1,12 @@
-# Yolov5 + Deep Sort with PyTorch
+# Face mask monitoring system for kiot campus
 
-[![HitCount](http://hits.dwyl.com/{mikel-brostrom}/{Yolov5_DeepSort_Pytorch}.svg)](http://hits.dwyl.com/{mikel-brostrom}/{Yolov5_DeepSort_Pytorch})
+This project is based on https://github.com/mikel-brostrom/Yolov5_DeepSort_Pytorch 
+
+Title: Face Mask Monitoring at KIOT Campus Gate
+
+A project Submitted to Department of Software Engineering for Partial Fulfillment of the Requirement for the Degree of Bachelor in Software in Engineering.
 
 
-![](Town.gif)
-
-## Introduction
-
-This repository contains a moded version of PyTorch YOLOv5 (https://github.com/ultralytics/yolov5). It filters out every detection that is not a person. The detections of persons are then passed to a Deep Sort algorithm (https://github.com/ZQPei/deep_sort_pytorch) which tracks the persons. The reason behind the fact that it just tracks persons is that the deep association metric is trained on a person ONLY datatset.
-
-## Description
-
-The implementation is based on two papers:
-
-- Simple Online and Realtime Tracking with a Deep Association Metric
-https://arxiv.org/abs/1703.07402
-- YOLOv4: Optimal Speed and Accuracy of Object Detection
-https://arxiv.org/pdf/2004.10934.pdf
 
 ## Requirements
 
@@ -49,10 +39,10 @@ Tracking can be run on most video formats
 python3 track.py --source ...
 ```
 
-- Video:  `--source file.mp4`
+- Video:  `--source video.mp4`
 - Webcam:  `--source 0`
-- RTSP stream:  `--source rtsp://170.93.143.139/rtplive/470011e600ef003a004ee33696235daa`
-- HTTP stream:  `--source http://wmccpinetop.axiscam.net/mjpg/video.mjpg`
+- RTSP stream:  `--source rtsp://0.0.0.0/**
+- HTTP stream:  `--source http://**`
 
 MOT compliant results can be saved to `inference/output` by 
 
@@ -69,5 +59,9 @@ For more detailed information about the algorithms and their corresponding lisen
 2 run streaming servers: `python try/socket/catchserver.py ` and `python try/socket/catchserver2.py`
 2 run server: `python run_server`
 
+Prepared By
+Elyas Abate 
 
-sudo netstat -tpln | grep mysqld > this.txt 
+
+Advisor: Ashenafi Workie (MSc.)
+Submitted Date: July
