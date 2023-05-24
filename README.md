@@ -59,6 +59,10 @@ For more detailed information about the algorithms and their corresponding lisen
 2 run streaming servers: `python try/socket/catchserver.py ` and `python try/socket/catchserver2.py`
 2 run server: `python run_server`
 
+## Deployment Diagram 
+![DD Diagram](https://firebasestorage.googleapis.com/v0/b/whosela.appspot.com/o/fmddd.PNG?alt=media&token=8e2c59eb-0440-43af-96f3-3c1848c81f0e)
+
+
 Prepared By
 Elyas Abate 
 
